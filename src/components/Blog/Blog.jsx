@@ -1,6 +1,6 @@
 /* eslint-disable react/prop-types */
 
-const Blog = ({blog,handleAddToBookmark}) => {
+const Blog = ({blog,handleAddToBookmark,handleSpentTime}) => {
 
     const {title,author,cover,hashtags,reading_time,posted_date,author_img} = blog
 
@@ -21,7 +21,7 @@ const Blog = ({blog,handleAddToBookmark}) => {
                 <div>
 
                     <span>{reading_time} min read </span>
-                    <button onClick={handleAddToBookmark}><i className="fa-solid fa-bookmark"></i></button>
+                    <button onClick={()=>handleAddToBookmark(title)}><i className="fa-solid fa-bookmark"></i></button>
                 </div>
 
 
@@ -34,6 +34,7 @@ const Blog = ({blog,handleAddToBookmark}) => {
                 }
 
             </p>
+            <button onClick={()=>handleSpentTime(reading_time)}>Mark as read</button>
             
         </div>
     );
