@@ -34,7 +34,7 @@ const Blog = ({blog,handleAddToBookmark,handleSpentTime}) => {
                 }
 
             </p>
-            <button onClick={()=>handleSpentTime(reading_time)}>Mark as read</button>
+            <button onClick={()=>handleSpentTime(reading_time,title)}>Mark as read</button>
             
         </div>
     );

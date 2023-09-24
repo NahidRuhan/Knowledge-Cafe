@@ -13,9 +13,11 @@ function App() {
     setBookmarks([...bookmarks,blog])
   }
 
-  const handleSpentTime=(time) =>{
+  const handleSpentTime=(time,title) =>{
 
     setTimeSpent(timeSpent+time)
+
+    setBookmarks(bookmarks.filter(bookmark => bookmark!=title))
 
   }
 
