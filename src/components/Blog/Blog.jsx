@@ -1,12 +1,14 @@
-const Blog = ({blog}) => {
+/* eslint-disable react/prop-types */
+
+const Blog = ({blog,handleAddToBookmark}) => {
 
     const {title,author,cover,hashtags,reading_time,posted_date,author_img} = blog
 
     return (
-        <div>
+        <div className="mb-20">
 
-            <img src={cover} alt="" />
-            <div className="flex justify-between">
+            <img className="w-full mb-8" src={cover} alt="" />
+            <div className="flex justify-between mb-4">
 
                 <div className="flex">
                     <img className="w-14" src={author_img} alt="" />
@@ -18,7 +20,8 @@ const Blog = ({blog}) => {
                 </div>
                 <div>
 
-                    <span>{reading_time} min read</span>
+                    <span>{reading_time} min read </span>
+                    <button onClick={handleAddToBookmark}><i className="fa-solid fa-bookmark"></i></button>
                 </div>
 
 
