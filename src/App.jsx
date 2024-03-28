@@ -1,38 +1,35 @@
-import { useState } from 'react'
+import { useState } from 'react';
 import './App.css'
-import Blogs from './components/Blogs/Blogs'
-import Bookmarks from './components/Bookmarks/Bookmarks'
-import Header from './components/Header/Header'
+import Blogs from './components/Blogs'
+import Bookmarks from './components/Bookmarks'
+import Header from './components/Header'
 
 function App() {
 
-  const [bookmarks, setBookmarks] = useState([])
-  const [timeSpent, setTimeSpent] = useState(0)
+  const [title, setTitle] = useState([]);
+  const [read,SetRead] = useState(0);
 
-  const handleAddToBookmark = blog =>{
-    setBookmarks([...bookmarks,blog])
+  const handleBookmark = (titleProp) => {
+    setTitle([...title,titleProp]);
+  };
+
+  const handleRead = (titleProp,timeProp) => {
+    const filteredTitle = title.filter(title => {
+      return title != titleProp;
+    });
+    setTitle(filteredTitle)
+    SetRead(read+timeProp);
   }
 
-  const handleSpentTime=(time,title) =>{
-
-    setTimeSpent(timeSpent+time)
-
-    setBookmarks(bookmarks.filter(bookmark => bookmark!=title))
-
-  }
 
   return (
-    <>
-
-      <Header/>
-      <div className='md:flex max-w-7xl mx-auto'>
-        <Blogs handleAddToBookmark={handleAddToBookmark} handleSpentTime={handleSpentTime}></Blogs>  
-        <Bookmarks bookmarks={bookmarks} timeSpent={timeSpent}/>      
+    <div className='max-w-5xl mx-auto py-10 space-y-7'>
+      <Header></Header>
+      <div className='flex'>
+        <div className='basis-2/3'><Blogs handleBookmark={handleBookmark} handleRead={handleRead}></Blogs></div>
+        <div className='basis-1/3'><Bookmarks title={title} read={read}></Bookmarks></div>
       </div>
-
-
-
-    </>
+    </div>
   )
 }
 
