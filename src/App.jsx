@@ -1,16 +1,20 @@
 import { useState } from 'react';
-import './App.css'
 import Blogs from './components/Blogs'
 import Bookmarks from './components/Bookmarks'
 import Header from './components/Header'
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function App() {
 
   const [title, setTitle] = useState([]);
   const [read,SetRead] = useState(0);
 
+
   const handleBookmark = (titleProp) => {
-    setTitle([...title,titleProp]);
+    const alreadyExists = title.find(title=> titleProp===title);
+    if(alreadyExists!=titleProp) setTitle([...title,titleProp]);
+    else toast("Already Bookmarked!");
   };
 
   const handleRead = (titleProp,timeProp) => {
@@ -18,7 +22,9 @@ function App() {
       return title != titleProp;
     });
     setTitle(filteredTitle)
-    SetRead(read+timeProp);
+    const doesExist = title.filter((title)=> title==titleProp);
+    if(doesExist.length!=0)SetRead(read+timeProp);
+    else toast("Not bookmarked!");
   }
 
 
@@ -29,6 +35,7 @@ function App() {
         <div className='basis-2/3'><Blogs handleBookmark={handleBookmark} handleRead={handleRead}></Blogs></div>
         <div className='basis-1/3'><Bookmarks title={title} read={read}></Bookmarks></div>
       </div>
+      <ToastContainer/>
     </div>
   )
 }
